@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import org.dvir.driver.presentation.home.components.dates.LicenseDates
 import org.dvir.driver.presentation.home.components.indicators.AccompaniedIndicators
 import org.dvir.driver.presentation.home.components.permits.PermitsAndRestrictions
 import org.dvir.driver.presentation.home.viewmodel.HomeViewModel
@@ -50,7 +51,8 @@ fun HomeScreen(
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(32.dp)
+                    .padding(32.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 AccompaniedIndicators(
                     viewModel.state.value.endDayAccompaniedDaysLeft,
@@ -62,6 +64,14 @@ fun HomeScreen(
                 PermitsAndRestrictions(
                     canDriveAtDay = viewModel.state.value.endDayAccompaniedDaysLeft <= 0,
                     canDriveAtNight = viewModel.state.value.endNightAccompaniedDaysLeft <= 0
+                )
+
+                Spacer(modifier = Modifier.height(64.dp))
+
+                LicenseDates(
+                    licenseDate = viewModel.state.value.licenseDate!!,
+                    endDayAccompaniedDate = viewModel.state.value.endDayAccompaniedDate!!,
+                    endNightAccompaniedDate = viewModel.state.value.endNightAccompaniedDate!!
                 )
             }
         } else {
