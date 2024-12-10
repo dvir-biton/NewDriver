@@ -18,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import network.chaintech.kmp_date_time_picker.ui.datepicker.WheelDatePickerDialog
@@ -66,7 +67,7 @@ fun HomeScreen(
                 contentAlignment = Alignment.Center
             ) {
                 Text(
-                    text = "הזזת תאריך קבלת רישיון",
+                    text = viewModel.changeDateButtonText,
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Bold,
                     color = BackgroundColor,
@@ -118,7 +119,20 @@ fun HomeScreen(
                 )
             }
         } else {
-
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(32.dp),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    "ברוכים הבאים לאפליקציה\nבעת קבלת הרישיון עדכנו את התאריך בכפתור למטה",
+                    color = TextColor,
+                    fontSize = 24.sp,
+                    fontWeight = FontWeight.Medium,
+                    textAlign = TextAlign.Center
+                )
+            }
         }
     }
 }

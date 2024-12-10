@@ -15,6 +15,7 @@ import kotlinx.datetime.plus
 import kotlinx.datetime.toLocalDateTime
 import org.dvir.driver.core.Constants
 import org.dvir.driver.data.DriverDateRepository
+import kotlin.math.max
 
 class HomeViewModel(
     private val driverDateRepository: DriverDateRepository
@@ -28,12 +29,20 @@ class HomeViewModel(
     var isDateDialogOpen by mutableStateOf(false)
         private set
 
+    var changeDateButtonText by mutableStateOf("הזזת תאריך קבלת רישיון")
+        private set
+
     init {
         setupLicenseDate()
     }
 
     private fun setupLicenseDate() {
-        val dateMillis = driverDateRepository.getDate() ?: return
+        val dateMillis = driverDateRepository.getDate()
+        if (dateMillis == null) {
+            changeDateButtonText = "עדכון תאריך קיבלת רישיון"
+            return
+        }
+
         val date: LocalDate = Instant.fromEpochMilliseconds(dateMillis)
             .toLocalDateTime(TimeZone.currentSystemDefault())
             .date
@@ -47,8 +56,8 @@ class HomeViewModel(
             licenseDate = date,
             endDayAccompaniedDate = endDayAccompaniedDate,
             endNightAccompaniedDate = endNightAccompaniedDate,
-            endDayAccompaniedDaysLeft = today.daysUntil(endDayAccompaniedDate) - 1,
-            endNightAccompaniedDaysLeft = today.daysUntil(endNightAccompaniedDate) - 1
+            endDayAccompaniedDaysLeft = max(today.daysUntil(endDayAccompaniedDate) - 1, 0),
+            endNightAccompaniedDaysLeft = max(today.daysUntil(endNightAccompaniedDate) - 1, 0)
         )
     }
 
