@@ -1,4 +1,4 @@
-package org.dvir.driver.presentation.home
+package org.dvir.driver.presentation.home.viewmodel
 
 import kotlinx.datetime.LocalDate
 
