@@ -21,21 +21,6 @@ fun AccompaniedIndicators(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceAround
     ) {
-        val percentageDay = (Constants.DAY_ACCOMPANIED_DAYS - endDayAccompaniedDaysLeft) / Constants.DAY_ACCOMPANIED_DAYS.toFloat()
-        CircularProgressIndicator(
-            percentage = percentageDay,
-            color = DayColor,
-            backgroundColor = SurfaceColor,
-            strokeWidth = 16f,
-            daysLeft = endDayAccompaniedDaysLeft,
-            title = {
-                Text(
-                    text = "מלווה יום",
-                    color = TextColor
-                )
-            }
-        )
-
         val percentageNight = (Constants.NIGHT_ACCOMPANIED_DAYS - endNightAccompaniedDaysLeft) / Constants.NIGHT_ACCOMPANIED_DAYS.toFloat()
         CircularProgressIndicator(
             percentage = percentageNight,
@@ -46,6 +31,21 @@ fun AccompaniedIndicators(
             title = {
                 Text(
                     text = "מלווה לילה",
+                    color = TextColor
+                )
+            }
+        )
+
+        val percentageDay = (Constants.DAY_ACCOMPANIED_DAYS - endDayAccompaniedDaysLeft) / Constants.DAY_ACCOMPANIED_DAYS.toFloat()
+        CircularProgressIndicator(
+            percentage = percentageDay,
+            color = DayColor,
+            backgroundColor = SurfaceColor,
+            strokeWidth = 16f,
+            daysLeft = endDayAccompaniedDaysLeft,
+            title = {
+                Text(
+                    text = "מלווה יום",
                     color = TextColor
                 )
             }
