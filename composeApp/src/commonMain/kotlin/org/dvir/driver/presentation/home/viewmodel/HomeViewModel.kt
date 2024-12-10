@@ -9,9 +9,11 @@ import kotlinx.datetime.DatePeriod
 import kotlinx.datetime.Instant
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.TimeZone
+import kotlinx.datetime.atStartOfDayIn
 import kotlinx.datetime.daysUntil
 import kotlinx.datetime.plus
 import kotlinx.datetime.toLocalDateTime
+import org.dvir.driver.core.Constants
 import org.dvir.driver.data.DriverDateRepository
 
 class HomeViewModel(
@@ -27,7 +29,6 @@ class HomeViewModel(
         private set
 
     init {
-        driverDateRepository.putDate(1733461868000)
         setupLicenseDate()
     }
 
@@ -38,8 +39,8 @@ class HomeViewModel(
             .date
 
         isDateFound = true
-        val endDayAccompaniedDate = date.plus(DatePeriod(months = 3))
-        val endNightAccompaniedDate = date.plus(DatePeriod(months = 6))
+        val endDayAccompaniedDate = date.plus(DatePeriod(months = Constants.DAY_ACCOMPANIED_MONTHS))
+        val endNightAccompaniedDate = date.plus(DatePeriod(months = Constants.NIGHT_ACCOMPANIED_MONTHS))
         val today: LocalDate = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()).date
 
         _state.value = state.value.copy(
@@ -49,6 +50,12 @@ class HomeViewModel(
             endDayAccompaniedDaysLeft = today.daysUntil(endDayAccompaniedDate) - 1,
             endNightAccompaniedDaysLeft = today.daysUntil(endNightAccompaniedDate) - 1
         )
+    }
+
+    fun onChangeDate(date: LocalDate) {
+        driverDateRepository.putDate(date.atStartOfDayIn(TimeZone.UTC).toEpochMilliseconds())
+        setupLicenseDate() // setup date accordingly
+        onCloseDateDialog()
     }
 
     fun onOpenDateDialog() {
