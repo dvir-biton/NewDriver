@@ -1,4 +1,4 @@
-package org.dvir.driver.presentation.home.components
+package org.dvir.driver.presentation.home.components.indicators
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Box

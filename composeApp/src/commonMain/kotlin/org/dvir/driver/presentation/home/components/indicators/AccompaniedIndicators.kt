@@ -1,4 +1,4 @@
-package org.dvir.driver.presentation.home.components
+package org.dvir.driver.presentation.home.components.indicators
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -6,8 +6,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import org.dvir.driver.core.Constants
+import org.dvir.driver.presentation.theme.colors.DayColor
+import org.dvir.driver.presentation.theme.colors.NightColor
 import org.dvir.driver.presentation.theme.colors.SurfaceColor
 import org.dvir.driver.presentation.theme.colors.TextColor
 
@@ -23,7 +24,7 @@ fun AccompaniedIndicators(
         val percentageDay = (Constants.DAY_ACCOMPANIED_DAYS - endDayAccompaniedDaysLeft) / Constants.DAY_ACCOMPANIED_DAYS.toFloat()
         CircularProgressIndicator(
             percentage = percentageDay,
-            color = Color(0xFFFDFD96),
+            color = DayColor,
             backgroundColor = SurfaceColor,
             strokeWidth = 16f,
             daysLeft = endDayAccompaniedDaysLeft,
@@ -38,7 +39,7 @@ fun AccompaniedIndicators(
         val percentageNight = (Constants.NIGHT_ACCOMPANIED_DAYS - endNightAccompaniedDaysLeft) / Constants.NIGHT_ACCOMPANIED_DAYS.toFloat()
         CircularProgressIndicator(
             percentage = percentageNight,
-            color = Color(0xFFADD8E6),
+            color = NightColor,
             backgroundColor = SurfaceColor,
             strokeWidth = 16f,
             daysLeft = endNightAccompaniedDaysLeft,

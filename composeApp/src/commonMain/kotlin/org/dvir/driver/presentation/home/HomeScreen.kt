@@ -16,7 +16,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import org.dvir.driver.presentation.home.components.AccompaniedIndicators
+import org.dvir.driver.presentation.home.components.indicators.AccompaniedIndicators
+import org.dvir.driver.presentation.home.components.permits.PermitsAndRestrictions
 import org.dvir.driver.presentation.home.viewmodel.HomeViewModel
 import org.dvir.driver.presentation.theme.colors.BackgroundColor
 import org.dvir.driver.presentation.theme.colors.SurfaceColor
@@ -56,9 +57,12 @@ fun HomeScreen(
                     viewModel.state.value.endNightAccompaniedDaysLeft
                 )
 
-                Spacer(modifier = Modifier.height(32.dp))
+                Spacer(modifier = Modifier.height(64.dp))
 
-
+                PermitsAndRestrictions(
+                    canDriveAtDay = viewModel.state.value.endDayAccompaniedDaysLeft <= 0,
+                    canDriveAtNight = viewModel.state.value.endNightAccompaniedDaysLeft <= 0
+                )
             }
         } else {
 
